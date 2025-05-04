@@ -33,6 +33,7 @@
     <link href="assets/css/odometer-theme-default.css" rel="stylesheet">
     <link href="assets/sass/style.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var isNS = (navigator.appName == "PN") ? 1 : 0;
         if(navigator.appName == "PN") document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
@@ -268,18 +269,18 @@
                             <p>We’re here to help! Whether you need more information about our services, want to request a quote, or simply have a question — our team is ready to assist you.</p>
                         </div>
                         <div class="wpo-contact-form-area">
-                            <form method="post" class="contact-validation-active" id="contact-form-main">
+                            <form method="" class="contact-validation-active" id="submit-form">
                                 <div>
                                     <input type="text" class="form-control" name="name" id="name"
-                                        placeholder="Your Name*">
+                                        placeholder="Your Name*" required >
                                 </div>
                                 <div>
                                     <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email*">
+                                        placeholder="Your Email*" required >
                                 </div>
                                 <div>
                                     <input type="text" class="form-control" name="adress" id="adress"
-                                        placeholder="Adress">
+                                        placeholder="Adress" required >
                                 </div>
                                 <div>
                                     <select name="service" class="form-control">
@@ -304,6 +305,27 @@
                                     <div id="error"> Error occurred while sending email. Please try again later. </div>
                                 </div>
                             </form>
+
+                            <script>
+                                $("#submit-form").submit((e)=>{
+                                e.preventDefault()
+                                $.ajax({
+                                url:"https://script.google.com/macros/s/AKfycbyzxqxdbYWYybsjYBTSBMXpk3V5_Gm2RnWvdN0poLd1V6LeL4wTjjogbERFeROlgLCz/exec",
+                                data:$("#submit-form").serialize(),
+                                method:"post",
+                                success:function (response){
+                                alert("Our Sales Team will contact you shortly. Thank you!")
+                                window.location.reload()
+                                //window.location.href="https://google.com"
+                                },
+                                error:function (err){
+                                alert("Something Error")
+                                
+                                }
+                                })
+                                })
+                                </script>
+
                         </div>
                     </div>
                 </div>
